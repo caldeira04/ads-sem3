@@ -1,6 +1,4 @@
 import csv
-import locale
-locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 students = []
 
@@ -22,11 +20,9 @@ def most_used_platform():
     for student in students:
         platform = student['Most_Used_Platform']
         platforms[platform] = platforms.get(platform, 0) + 1
-
     print("As plataformas que reunem mais usuários na pesquisa são: ")
     groups = dict(sorted(platforms.items(),
                   key=lambda item: item[1], reverse=True))
-
     for num, (platform, count) in enumerate(groups.items(), start=1):
         print(f"{num}. {platform} - {count} usuários")
 
@@ -35,7 +31,6 @@ def compare_countries():
     title("Comparação entre Países: Redes Mais Utilizadas")
     country1 = input("País 1: ")
     country2 = input("País 2: ")
-
     platforms = {}
     for student in students:
         if student['Country'] == country1 or student['Country'] == country2:
@@ -43,7 +38,6 @@ def compare_countries():
             if platform not in platforms:
                 platforms[platform] = {country1: 0, country2: 0}
             platforms[platform][student['Country']] += 1
-
     print(f"Comparação entre {country1} e {country2}:")
     for platform, counts in platforms.items():
         print(f"{platform}: {
@@ -53,7 +47,6 @@ def compare_countries():
 def average_platform_ages():
     title("Média de Idades por Plataforma")
     platform = input("Plataforma: ")
-
     ages = []
     for student in students:
         if student['Most_Used_Platform'] == platform:
@@ -62,7 +55,6 @@ def average_platform_ages():
                 ages.append(age)
             except ValueError:
                 continue
-
     if ages:
         average_age = sum(ages) / len(ages)
         print(f"Média de idade dos usuários do {
@@ -72,7 +64,7 @@ def average_platform_ages():
 
 
 def most_addicted_country():
-    title("País com Maior Vício em Redes Sociais")
+    title("País com Maior Pontuação de Vício em Redes Sociais")
     countries = {}
     for student in students:
         country = student['Country']
@@ -80,7 +72,6 @@ def most_addicted_country():
         if country not in countries:
             countries[country] = 0
         countries[country] = countries.get(country, 0) + addiction_level
-
     print("Top 10 Países com maior vício em redes sociais:")
     most_addicted = dict(sorted(countries.items(),
                                 key=lambda item: item[1], reverse=True))
@@ -146,7 +137,6 @@ def most_addicted_level():
                         "Nenhum usuário encontrado no grupo")
         print(f"Média de vício em redes sociais para {
             group}: {average_addiction:.2f}")
-
     else:
         print("Opção inválida.")
 
@@ -166,21 +156,17 @@ def most_used_by_country():
 
 
 def common_items_between_countries():
-    title("Itens em Comum entre Países")
+    title("Redes Sociais em Comum entre Países")
     country1 = input("País 1: ")
     country2 = input("País 2: ")
-
     items_country1 = set()
     items_country2 = set()
-
     for student in students:
         if student['Country'] == country1:
             items_country1.add(student['Most_Used_Platform'])
         elif student['Country'] == country2:
             items_country2.add(student['Most_Used_Platform'])
-
     common_items = items_country1.intersection(items_country2)
-
     if common_items:
         print(f"Itens em comum entre {country1} e {country2}:")
         for item in common_items:
@@ -195,10 +181,10 @@ while True:
     print("1. Rede Social Mais Utilizada")
     print("2. Comparar Países")
     print("3. Média de Idades por Plataforma")
-    print("4. Top 10 Países com Maior Vício em Redes Sociais")
+    print("4. Top 10 Países com Maior Pontuação de Vício em Redes Sociais")
     print("5. Grupo Acadêmico com Maior Vício em Redes Sociais")
     print("6. Rede Social Mais Utilizada por País")
-    print("7. Itens em comum entre os países")
+    print("7. Redes Sociais em comum entre os países")
     print("0. Sair")
     try:
         choice = int(input("Escolha uma opção: "))
