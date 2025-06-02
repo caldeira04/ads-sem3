@@ -33,21 +33,21 @@ def most_used_platform():
 
 def compare_countries():
     title("Comparação entre Países: Redes Mais Utilizadas")
-    coutry1 = input("País 1: ")
+    country1 = input("País 1: ")
     country2 = input("País 2: ")
 
     platforms = {}
     for student in students:
-        if student['Country'] == coutry1 or student['Country'] == country2:
+        if student['Country'] == country1 or student['Country'] == country2:
             platform = student['Most_Used_Platform']
             if platform not in platforms:
-                platforms[platform] = {coutry1: 0, country2: 0}
+                platforms[platform] = {country1: 0, country2: 0}
             platforms[platform][student['Country']] += 1
 
-    print(f"Comparação entre {coutry1} e {country2}:")
+    print(f"Comparação entre {country1} e {country2}:")
     for platform, counts in platforms.items():
         print(f"{platform}: {
-              coutry1} - {counts[coutry1]}, {country2} - {counts[country2]}")
+              country1} - {counts[country1]}, {country2} - {counts[country2]}")
 
 
 def average_platform_ages():
@@ -90,7 +90,7 @@ def most_addicted_country():
             break
 
 
-def most_addicted_academic_group():
+def most_addicted_level():
     title("Média de vício por grupo acadêmico")
     academic_group = ["Undergraduate", "Graduate", "High School"]
     num1 = sum1 = 0
@@ -189,7 +189,7 @@ while True:
     elif choice == 4:
         most_addicted_country()
     elif choice == 5:
-        most_addicted_academic_group()
+        most_addicted_level()
     elif choice == 6:
         most_used_by_country()
     elif choice == 0:
