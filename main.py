@@ -165,6 +165,31 @@ def most_used_by_country():
               most_used[0]} com {most_used[1]} usuários.")
 
 
+def common_items_between_countries():
+    title("Itens em Comum entre Países")
+    country1 = input("País 1: ")
+    country2 = input("País 2: ")
+
+    items_country1 = set()
+    items_country2 = set()
+
+    for student in students:
+        if student['Country'] == country1:
+            items_country1.add(student['Most_Used_Platform'])
+        elif student['Country'] == country2:
+            items_country2.add(student['Most_Used_Platform'])
+
+    common_items = items_country1.intersection(items_country2)
+
+    if common_items:
+        print(f"Itens em comum entre {country1} e {country2}:")
+        for item in common_items:
+            print(f"- {item}")
+    else:
+        print(f"Nenhum item em comum encontrado entre {
+              country1} e {country2}.")
+
+
 while True:
     title("Análise de Vício em Redes Sociais")
     print("1. Rede Social Mais Utilizada")
@@ -173,6 +198,7 @@ while True:
     print("4. Top 10 Países com Maior Vício em Redes Sociais")
     print("5. Grupo Acadêmico com Maior Vício em Redes Sociais")
     print("6. Rede Social Mais Utilizada por País")
+    print("7. Itens em comum entre os países")
     print("0. Sair")
     try:
         choice = int(input("Escolha uma opção: "))
@@ -192,6 +218,8 @@ while True:
         most_addicted_level()
     elif choice == 6:
         most_used_by_country()
+    elif choice == 7:
+        common_items_between_countries()
     elif choice == 0:
         print("Saindo...")
         break
