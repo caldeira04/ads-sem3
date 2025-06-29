@@ -1,8 +1,8 @@
 import { HealingStrategy } from "./HealingStrategy";
-import { Healable } from "./Healable";
+import { Character } from "../character/Character";
 
 class BigHeal implements HealingStrategy {
-  heal(character: Healable) {
+  heal(character: Character) {
     character.receiveHeal(20);
     console.log("Cura grande!");
   }

@@ -1,5 +1,5 @@
-import { Healable } from "./Healable";
+import { Character } from "../character/Character";
 
 export interface HealingStrategy {
-  heal(character: Healable): void;
+  heal(character: Character): void;
 }

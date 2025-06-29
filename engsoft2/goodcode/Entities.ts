@@ -25,6 +25,12 @@ class BossAttack implements AttackStrategy {
   }
 }
 
+class IceAttack implements AttackStrategy {
+  attack(): void {
+    console.log("Gelo em área!");
+  }
+}
+
 class FireAttack implements AttackStrategy {
   attack(): void {
     console.log("Fogo em área!");
@@ -67,6 +73,9 @@ player.performAttack();
 
 const dragon = new Character(new FireAttack());
 dragon.performAttack();
+
+const iceMage = new Character(new IceAttack());
+iceMage.performAttack();
 
 // certo. mas isso aí tá muito simples. os personagens só dão dano?
 // ai q vc se engana! confira ../goodercode
