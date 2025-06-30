@@ -15,7 +15,11 @@ class Enemy {
   }
 
   doAttack() {
-    console.log(`Atacando com ${this.attack} de dano`);
+    console.log(`Atacando com ${this.attack} de dano corpo-a-corpo`);
+  }
+
+  doFireAttack() {
+    console.log(`Atacando com ${this.attack} de dano de fogo`);
   }
 
   heal(heal: number) {
@@ -32,7 +36,7 @@ class Boss extends Enemy { }
 class Mob extends Enemy { }
 
 const badBoss = new Boss(100, 10, 5);
-badBoss.doAttack();
+badBoss.doFireAttack();
 
 // ok. temos nossas classes inicializadas. mas... player e boss não são necessariamente enemies.
 // além do mais, pode ser que cada char tenha atributos diferentes não presentes em inimigos.
