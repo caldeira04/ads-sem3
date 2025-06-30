@@ -1,22 +1,26 @@
 import random
+from datetime import datetime
 
 
 def game():
-    gridX = int(input("Digite a quantidade de quadrados na horizontal: "))
-    gridY = int(input("Digite a quantidade de quadrados na vertical: "))
+    player_name = input("Digite o nome do jogador: ")
+    if not player_name:
+        print("Nome do jogador não pode ser vazio.")
+    grid_x = int(input("Digite a quantidade de quadrados na horizontal: "))
+    grid_y = int(input("Digite a quantidade de quadrados na vertical: "))
     bombs = int(input("Digite a quantidade de bombas: "))
-    if bombs >= (gridX * gridY):
-        print("O número de minas é maior ou igual ao número de quadrados na grade")
+    if bombs >= (grid_x * grid_y):
+        print("O número de minas é maior ou igual ao número de quadrados na grade. O jogo não pode ser iniciado.")
         return
 
     def create_grid():
-        return [["[ ]" for _ in range(gridY)] for _ in range(gridX)]
+        return [["[ ]" for _ in range(grid_y)] for _ in range(grid_x)]
 
     def place_bombs(grid, bombs):
         count = 0
         while count < bombs:
-            x = random.randint(0, gridX - 1)
-            y = random.randint(0, gridY - 1)
+            x = random.randint(0, grid_x - 1)
+            y = random.randint(0, grid_y - 1)
             if grid[x][y] != '[B]':
                 grid[x][y] = '[B]'
                 count += 1
@@ -32,12 +36,12 @@ def game():
         for dx in [-1, 0, 1]:
             for dy in [-1, 0, 1]:
                 nx, ny = x + dx, y + dy
-                if 0 <= nx < gridX and 0 <= ny < gridY and grid[nx][ny] == '[B]':
+                if 0 <= nx < grid_x and 0 <= ny < grid_y and grid[nx][ny] == '[B]':
                     count += 1
         return count
 
     def flood_fill(x, y, visited):
-        if (x, y) in visited or not (0 <= x < gridX and 0 <= y < gridY):
+        if (x, y) in visited or not (0 <= x < grid_x and 0 <= y < grid_y):
             return
         visited.add((x, y))
         if real_grid[x][y] == '[B]':
@@ -51,8 +55,8 @@ def game():
                         flood_fill(x + dx, y + dy, visited)
 
     def check_victory():
-        for x in range(gridX):
-            for y in range(gridY):
+        for x in range(grid_x):
+            for y in range(grid_y):
                 if real_grid[x][y] != '[B]' and visible_grid[x][y] == '[ ]':
                     return False
         return True
@@ -60,6 +64,7 @@ def game():
     real_grid = create_grid()
     visible_grid = create_grid()
     real_grid = place_bombs(real_grid, bombs)
+    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     print("Grade do jogo:")
     print_grid(visible_grid)
@@ -73,7 +78,7 @@ def game():
 
             if input_coordinates[0].lower() == 'f' and len(input_coordinates) == 3:
                 y, x = int(input_coordinates[1]), int(input_coordinates[2])
-                if not (0 <= x < gridX and 0 <= y < gridY):
+                if not (0 <= x < grid_x and 0 <= y < grid_y):
                     print("Coordenadas fora dos limites. Tente novamente.")
                     continue
                 if visible_grid[x][y] == '[ ]':
@@ -88,7 +93,7 @@ def game():
 
             elif len(input_coordinates) == 2:
                 y, x = int(input_coordinates[0]), int(input_coordinates[1])
-                if not (0 <= x < gridX and 0 <= y < gridY):
+                if not (0 <= x < grid_x and 0 <= y < grid_y):
                     print("Coordenadas fora dos limites. Tente novamente.")
                     continue
                 if visible_grid[x][y] == '[F]':
@@ -97,11 +102,18 @@ def game():
 
                 if real_grid[x][y] == '[B]':
                     print("Voce atingiu uma bomba! Fim de jogo.")
-                    for i in range(gridX):
-                        for j in range(gridY):
-                            if real_grid[i][j] == '[B]':
+                    not_marked_bombs = 0
+                    for i in range(grid_x):
+                        for j in range(grid_y):
+                            if real_grid[i][j] == '[B]' and visible_grid[i][j] != '[F]':
                                 visible_grid[i][j] = '[B]'
+                                not_marked_bombs += 1
                     print_grid(visible_grid)
+                    print(f"Você perdeu, {player_name}! Bombas restantes: {
+                          not_marked_bombs}.")
+                    with open("ranking.txt", "a") as file:
+                        file.write(
+                            f"{date} - {player_name} - derrota: {grid_x}x{grid_y}, {bombs} bombas, {not_marked_bombs} bombas restantes\n")
                     break
                 else:
                     visited = set()
@@ -111,6 +123,9 @@ def game():
 
                     if check_victory():
                         print("Parabéns! Você venceu!")
+                        with open("ranking.txt", "a") as file:
+                            file.write(
+                                f"{date} - {player_name} - vitória: {grid_x}x{grid_y}, {bombs} bombas.\n")
                         break
 
             else:
