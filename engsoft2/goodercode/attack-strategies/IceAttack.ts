@@ -1,0 +1,11 @@
+import { Character } from "../character/Character";
+import { AttackStrategy } from "./AttackStrategy";
+
+class IceAttack implements AttackStrategy {
+  attack(attacker: Character, target: Character) {
+    console.log(`Gelo em área de ${attacker.getName()} em ${target.getName()}! HP de ${target.getName()}: ${target.getHp()}`);
+    target.receiveAttack(100);
+  }
+}
+
+export default IceAttack;
