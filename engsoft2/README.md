@@ -17,3 +17,5 @@ $ npx ts-node goodercode/index.ts
 ## [Implementação Correta do Padrão Strategy](./goodcode/README.md)
 
 ## [Implementação do Padrão Strategy com POO](./goodercode/README.md)
+
+## [Vídeo de apresentação](https://youtu.be/P6EBHT3PUto)

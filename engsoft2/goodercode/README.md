@@ -243,16 +243,23 @@ player.performHeal();
 ```
 
 ```bash
-$ npx ts-node index.ts
+$ npx ts-node goodercode/index.ts
 Ataque a longa distância de Enemy em Player! HP de Player: 100
-Player recebeu 20 de dano! Vida atual: 80
+Player recebeu 35 de dano! Vida atual: 65
 Ataque corpo a corpo de Player em Enemy! HP de Enemy: 10
 Enemy recebeu 10 de dano! Vida atual: 0
 Enemy morreu!
 Player não pode atacar Enemy! Enemy está morto!
 Player não pode atacar Enemy! Enemy está morto!
-Player recebeu 20 de vida! Vida atual: 100
+Player recebeu 50 de vida! Vida atual: 115
 Cura grande!
+Player recebeu 5 de vida! Vida atual: 120
+Cura pequena!
+Fogo em área de Dragon em Player! HP de Player: 120
+Player recebeu 100 de dano! Vida atual: 20
+Gelo em área de Ice Mage em Player! HP de Player: 20
+Player recebeu 100 de dano! Vida atual: -80
+Player morreu!
 ```
 
 ## Para adicionar novos tipos de ataque?

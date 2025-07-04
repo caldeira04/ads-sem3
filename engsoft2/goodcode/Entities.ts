@@ -37,6 +37,12 @@ class FireAttack implements AttackStrategy {
   }
 }
 
+class LightningAttack implements AttackStrategy {
+  attack(): void {
+    console.log("Raio em área!");
+  }
+}
+
 // agora, criamos um char finalmente
 
 class Character {
@@ -76,6 +82,9 @@ dragon.performAttack();
 
 const iceMage = new Character(new IceAttack());
 iceMage.performAttack();
+
+const pikachu = new Character(new LightningAttack());
+pikachu.performAttack();
 
 // certo. mas isso aí tá muito simples. os personagens só dão dano?
 // ai q vc se engana! confira ../goodercode
