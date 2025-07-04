@@ -1,8 +1,16 @@
 import { PrismaClient } from '../generated/prisma';
 const prisma = new PrismaClient();
 import { Router } from 'express';
+import { z } from 'zod';
+import bcrypt from 'bcrypt';
 const router = Router();
 const nodemailer = require('nodemailer');
+
+const userSchema = z.object({
+  name: z.string().min(3, { message: 'Name is required' }),
+  email: z.string().email().min(10, { message: 'Invalid email format' }),
+  password: z.string()
+});
 
 router.get('/', async (req, res) => {
   try {
@@ -14,13 +22,53 @@ router.get('/', async (req, res) => {
   }
 })
 
+function validatePassword(password: string) {
+  const msg: string[] = [];
+
+  if (password.length < 8) {
+    msg.push('Password must be at least 8 characters long');
+  }
+
+  if (!/[A-Z]/.test(password)) {
+    msg.push('Password must contain at least one uppercase letter');
+  }
+  if (!/[a-z]/.test(password)) {
+    msg.push('Password must contain at least one lowercase letter');
+  }
+  if (!/[0-9]/.test(password)) {
+    msg.push('Password must contain at least one number');
+  }
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    msg.push('Password must contain at least one special character');
+  }
+
+  return msg;
+}
+
 router.post('/', async (req, res) => {
-  const { name, email } = req.body;
+  const validateUser = userSchema.safeParse(req.body);
+  if (!validateUser.success) {
+    res.status(400).json({ errors: validateUser.error.flatten().fieldErrors });
+    return 
+  }
+
+  const { name, email, password } = validateUser.data;
+  const passwordErrors = validatePassword(password);
+
+  if (passwordErrors.length > 0) {
+    res.status(400).json({ errors: passwordErrors.join(', ') });
+    return 
+  }
+
+  const salt = bcrypt.genSaltSync(12);
+  const hash = bcrypt.hashSync(password, salt);
+
   try {
     const newUser = await prisma.user.create({
       data: {
         name,
         email,
+        password: hash,
       },
     });
     res.status(201).json({ newUser, message: 'User created successfully' });

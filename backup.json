@@ -1,0 +1,134 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "João Pedro Caldeira",
+      "password": "$2b$12$/lA6EUozY1YGXQ/oHUDQCOpuDtM.KRGzRdOw0x.4m.fmxhs4oT16W",
+      "email": "joao.p.caldeira@icloud.com",
+      "createdAt": "2025-07-03T22:07:06.829Z",
+      "updatedAt": "2025-07-03T22:07:06.829Z"
+    },
+    {
+      "id": 2,
+      "name": "Leila Silva",
+      "password": "$2b$12$/mCiX69oufrZlHDXbkAWr.RlRomZWrCvamJbZMfz.Se8zp5R6lBd.",
+      "email": "leilarmsilva@hotmail.com",
+      "createdAt": "2025-07-03T22:46:54.404Z",
+      "updatedAt": "2025-07-03T22:46:54.404Z"
+    },
+    {
+      "id": 3,
+      "name": "admin",
+      "password": "$2b$12$W/unugeL4iq09wK1uqYywOfnWTL7oyimbDECZm3JCQrjGiyYJgWBq",
+      "email": "admin@gmail.com",
+      "createdAt": "2025-07-04T03:17:13.792Z",
+      "updatedAt": "2025-07-04T03:17:13.792Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 2,
+      "name": "COPÃO JACK DANIELS",
+      "price": 38,
+      "stock": 35,
+      "createdAt": "2025-07-03T22:50:55.576Z",
+      "updatedAt": "2025-07-04T03:02:56.008Z",
+      "userId": 2
+    },
+    {
+      "id": 1,
+      "name": "COPÃO JACK DANIELS",
+      "price": 38,
+      "stock": 25,
+      "createdAt": "2025-07-03T22:44:54.954Z",
+      "updatedAt": "2025-07-04T03:03:25.859Z",
+      "userId": 1
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "quantity": 5,
+      "price": 190,
+      "deleted": false,
+      "createdAt": "2025-07-03T22:52:01.211Z",
+      "updatedAt": "2025-07-03T22:52:01.211Z",
+      "deletedAt": null,
+      "productId": 2,
+      "userId": 2
+    },
+    {
+      "id": 2,
+      "quantity": 5,
+      "price": 190,
+      "deleted": true,
+      "createdAt": "2025-07-04T02:54:28.862Z",
+      "updatedAt": "2025-07-04T03:02:56.011Z",
+      "deletedAt": "2025-07-04T03:02:56.010Z",
+      "productId": 2,
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "quantity": 5,
+      "price": 190,
+      "deleted": true,
+      "createdAt": "2025-07-04T02:56:49.823Z",
+      "updatedAt": "2025-07-04T03:03:25.861Z",
+      "deletedAt": "2025-07-04T03:03:25.860Z",
+      "productId": 1,
+      "userId": 1
+    }
+  ],
+  "logs": [
+    {
+      "id": 1,
+      "action": "Leila Silva sold an item for 190",
+      "createdAt": "2025-07-03T22:52:01.220Z",
+      "updatedAt": "2025-07-03T22:52:01.220Z",
+      "userId": 2
+    },
+    {
+      "id": 2,
+      "action": "João Pedro Caldeira sold an item for 190",
+      "createdAt": "2025-07-04T02:54:28.868Z",
+      "updatedAt": "2025-07-04T02:54:28.868Z",
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "action": "João Pedro Caldeira sold an item for 190",
+      "createdAt": "2025-07-04T02:56:49.828Z",
+      "updatedAt": "2025-07-04T02:56:49.828Z",
+      "userId": 1
+    },
+    {
+      "id": 4,
+      "action": "João Pedro Caldeira created a new product: COPÃO SIR EDWARDS",
+      "createdAt": "2025-07-04T03:10:30.920Z",
+      "updatedAt": "2025-07-04T03:10:30.920Z",
+      "userId": 1
+    },
+    {
+      "id": 5,
+      "action": "João Pedro Caldeira created a new product: COPÃO SIR EDWARDS",
+      "createdAt": "2025-07-04T03:14:10.158Z",
+      "updatedAt": "2025-07-04T03:14:10.158Z",
+      "userId": 1
+    },
+    {
+      "id": 6,
+      "action": "João Pedro Caldeira deleted the product: COPÃO SIR EDWARDS",
+      "createdAt": "2025-07-04T03:14:17.770Z",
+      "updatedAt": "2025-07-04T03:14:17.770Z",
+      "userId": 1
+    },
+    {
+      "id": 7,
+      "action": "Access denied to system",
+      "createdAt": "2025-07-04T03:29:59.488Z",
+      "updatedAt": "2025-07-04T03:29:59.488Z",
+      "userId": 3
+    }
+  ]
+}

@@ -10,19 +10,21 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Sales {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   quantity  Int
   price     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  productId Int
-  Product   Product  @relation(fields: [productId], references: [id])
-  User      User?    @relation(fields: [userId], references: [id])
+  deleted   Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  productId Int       
+  Product   Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  User      User?     @relation(fields: [userId], references: [id])
   userId    Int?
 }
 
@@ -41,9 +43,20 @@ model Product {
 model User {
   id        Int       @id @default(autoincrement())
   name      String
+  password  String
   email     String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Sales     Sales[]
   Product   Product[]
+  Log       Log[]
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  action    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int?
+  User      User?    @relation(fields: [userId], references: [id])
 }
